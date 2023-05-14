@@ -1,0 +1,16 @@
+.selectItem {
+    height: 55px;
+    padding-left: 15px;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 17px;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+}
+
+.divider {
+    height: 1px;
+    width: 100%;
+    background-color: var(--gray-de);
+  }

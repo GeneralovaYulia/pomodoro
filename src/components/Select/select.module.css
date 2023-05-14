@@ -1,0 +1,30 @@
+.menuButton {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 15px;
+    width: 370px;
+    height: 55px;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 17px;
+    border: none;
+    border-radius: 0;
+    color: var(--black);
+    background-color: var(--white1);
+}
+
+.select {
+    position: relative;
+}
+
+.customSelect {
+    position: absolute;
+    width: 370px;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 17px;
+    color: var(--black);
+    background-color: var(--white1);
+}
+

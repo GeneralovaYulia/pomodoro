@@ -1,0 +1,19 @@
+.menuItem {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 17px;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+}
+
+.buttonMenu {
+    align-items: center;
+    display: flex;
+    padding: 10px 15px;
+    width: 100%;
+}
+
+.buttonText {
+    padding-left: 10px;
+}

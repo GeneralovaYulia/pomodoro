@@ -1,0 +1,45 @@
+.main {
+    display: flex;
+    padding-top: 100px;
+}
+
+.listBlock {
+    max-width: 600px;
+    margin-right: 20px;
+}
+
+.main_title {
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 33px;
+    color: var(--black);
+}
+
+.main_list {
+    margin-bottom: 25px;
+}
+
+.main_item {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 33px;
+    color: var(--black);
+}
+
+.main_item:before {
+    color: var(--red);
+    content: "•";
+    margin-right: 15px;
+}
+
+.totalTime {
+    color: var(--gray);
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 17px;
+    padding-top: 19px;
+}
+
+.timerWindows {
+    width: 733px;
+}

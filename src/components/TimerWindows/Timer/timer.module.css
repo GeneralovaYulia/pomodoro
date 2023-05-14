@@ -1,0 +1,55 @@
+.clock {
+    color: var(--black);
+    font-size: 150px;
+    font-weight: 200;
+    line-height: 179px;
+    position: relative;
+}
+
+.clockRed {
+    color: var(--red);
+    font-size: 150px;
+    font-weight: 200;
+    line-height: 179px;
+    position: relative;
+}
+
+.titleTask {
+    margin-bottom: 32px;
+}
+
+.buttonStart {
+    min-width: 145px;
+    height: 55px;
+    padding: 0 50px;
+    background-color: var(--green-light);
+    color: var(--white);
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 17px;
+    margin-right: 25px;
+}
+
+.buttonStop {
+    min-width: 145px;
+    height: 55px;
+    padding: 0 50px;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 17px;
+    background-color: initial;
+    border: 1px solid var(--grayC4);
+    color: var(--grayC4);
+}
+
+.buttonStopRed {
+    min-width: 145px;
+    height: 55px;
+    padding: 0 50px;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 17px;
+    background-color: initial;
+    border: 1px solid var(--red);
+    color: var(--red);
+}

@@ -1,0 +1,17 @@
+.DashDoard {
+    padding-top: 88px;
+    padding-bottom: 99px;
+}
+
+.DashBoard_choice {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+.DashBoard_title {
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 33px;
+    color: var(--black);
+}

@@ -1,0 +1,46 @@
+.menuButton {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 15px;
+    width: 370px;
+    height: 55px;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 17px;
+    color: var(--black);
+    background-color: var(--white1);
+}
+
+.menu {
+    position: relative;
+}
+
+.menuItemsList {
+    position: absolute;
+    z-index: 2;
+    top: 35px;
+    right: -65px;
+    width: 165px;
+    height: 153px;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 17px;
+    color: var(--gray);
+    background-color: var(--white);
+    border: 1px solid var(--gray);
+}
+
+.menuItemsList::before {
+    content: "";
+    height: 0;
+    width: 0;
+    border-style: solid;
+    border-color: var(--gray) transparent transparent;
+    border-width: 10px;
+    position: absolute;
+    left: 74px;
+    bottom: 150px;
+    pointer-events: none;
+    transform: rotate(180deg);
+}

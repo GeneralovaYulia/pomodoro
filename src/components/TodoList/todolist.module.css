@@ -1,0 +1,27 @@
+.item {
+    align-items: center;
+    display: flex;
+    padding: 19px 0;
+    position: relative;
+    width: 100%;
+    border-top: 1px solid var(--white3);
+    border-bottom: 1px solid var(--white3);
+}
+
+.counter {
+    border: 1px solid var(--grayC4);
+    border-radius: 50%;
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 17px;
+    margin-right: 10px;
+    padding: 4px 10px;
+}
+
+.titleButton {
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 17px;
+    color: var(--black);
+    margin-right: auto;
+}

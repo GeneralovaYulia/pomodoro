@@ -1,0 +1,35 @@
+.header {
+  box-shadow: 0px 10px 63px 0px hsla(0, 0%, 0%, 0.07);
+}
+
+.header_nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 0;
+}
+
+.header_logo {
+  display: flex;
+  align-items: center;
+}
+
+.header_title {
+  font-weight: 300;
+  font-size: 24px;
+  line-height: 24px;
+  padding-left: 13px;
+  color: var(--red);
+}
+
+.statistics {
+  display: flex;
+  align-items: center;
+}
+
+.statistics_title {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 17px;
+  padding-left: 9px;
+  color: var(--red);
+}

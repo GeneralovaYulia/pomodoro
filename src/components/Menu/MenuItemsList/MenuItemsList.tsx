@@ -1,0 +1,70 @@
+import React from 'react';
+import styles from './menuitemslist.module.css';
+import {
+	IconDropdownDelete,
+	IconDropdownEdit,
+	IconDropdownMinus,
+	IconDropdownPlus,
+} from '../../Icons';
+import { useDispatch } from 'react-redux';
+import { decrementCount, deleteTaskList, incrementCount } from '../../../store/tasks/action';
+
+export interface IMenuItemsList {
+	id?: string;
+}
+
+export function MenuItemsList({ id }: IMenuItemsList) {
+	const dispatch = useDispatch();
+
+	function handleClickIncrement() {
+		dispatch(incrementCount(id));
+	}
+
+	function handleClickDecrement() {
+		dispatch(decrementCount(id));
+	}
+
+	function handleClickDelete() {
+		dispatch(deleteTaskList(id));
+	}
+
+	return (
+		<ul className={styles.menuItemsList}>
+			<li className={styles.menuItem + ' ' + styles.mobileMenuIten}>
+				<button
+					className={styles.buttonMenu}
+					onClick={handleClickIncrement}
+				>
+					<IconDropdownPlus />
+					<span className={styles.buttonText}>Увеличить</span>
+				</button>
+			</li>
+			<li className={styles.menuItem + ' ' + styles.mobileMenuIten}>
+				<button className={styles.buttonMenu}>
+					<IconDropdownMinus />
+					<span
+						className={styles.buttonText}
+						onClick={handleClickDecrement}
+					>
+						Уменьшить
+					</span>
+				</button>
+			</li>
+			<li className={styles.menuItem + ' ' + styles.mobileMenuIten}>
+				<button className={styles.buttonMenu}>
+					<IconDropdownEdit />
+					<span className={styles.buttonText}>Редактировать</span>
+				</button>
+			</li>
+			<li className={styles.menuItem + ' ' + styles.mobileMenuIten}>
+				<button
+					className={styles.buttonMenu}
+					onClick={handleClickDelete}
+				>
+					<IconDropdownDelete />
+					<span className={styles.buttonText}>Удалить</span>
+				</button>
+			</li>
+		</ul>
+	);
+}

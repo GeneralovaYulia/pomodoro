@@ -1,0 +1,10 @@
+.dashBoard_top {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 32px;
+}
+
+.dashBoart_data {
+    display: flex;
+    justify-content: space-between;
+}

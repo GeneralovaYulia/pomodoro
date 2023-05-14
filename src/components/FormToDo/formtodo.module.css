@@ -1,0 +1,28 @@
+.TodoForm {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 25px;
+}
+
+.TodoForm_input {
+    height: 55px;
+    padding-top: 19px;
+    padding-bottom: 19px;
+    padding-left: 15px;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 17px;
+    border: none;
+    background-color: var(--white1);
+    margin-bottom: 25px;
+}
+
+.TodoForm_button {
+    width: 173px;
+    height: 55px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 17px;
+    color: var(--white);
+    background-color: var(--green-light);
+}

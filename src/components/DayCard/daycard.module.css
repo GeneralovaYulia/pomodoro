@@ -1,0 +1,29 @@
+.dayCard {
+    width: 296px;
+    height: 260px;
+    background-color: var(--white1);
+    padding: 25px;
+    margin-bottom: 32px;
+}
+
+.dayCard_title {
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 33px;
+    color: var(--black);
+    margin-bottom: 14px;
+}
+
+.dayCard_text {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 28px;
+    color: var(--black);
+}
+
+.dayCard_time {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 28px;
+    color: var(--red);
+}

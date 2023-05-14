@@ -1,0 +1,23 @@
+import React, { useState } from 'react';
+
+export function IconChoice() {
+	const [isExpanded, setIsExpanded] = useState(false);
+
+	const handleOnClick = () => {
+		setIsExpanded(!isExpanded);
+	};
+
+	return (
+		<svg
+			style={{ transform: isExpanded ? 'rotate(180deg)' : 'rotate(0)' }}
+			width="16"
+			height="10"
+			viewBox="0 0 16 10"
+			fill="none"
+			xmlns="http://www.w3.org/2000/svg"
+			onClick={handleOnClick}
+		>
+			<path d="M1 9L8 2L15 9" stroke="#B7280F" strokeWidth="2" />
+		</svg>
+	);
+}
