@@ -3,7 +3,7 @@ import { addActiveTask } from "../store/actualTimer/action";
 import { addStatTask } from "../store/statistics/action";
 import { deleteTaskList, updateTasks } from "../store/tasks/action";
 
-interface ITimerHook {
+interface IStopTimerHandler {
     status: string;
     timerOn: boolean;
     timeLeft: number;
@@ -35,12 +35,13 @@ export const handleStopTimerFunction = ({
     setCounterPause,
     dispatch,
     timerCurrent,
-}: ITimerHook) => {
+}: IStopTimerHandler) => {
     const stopTimer = () => {
         setTimerOn(false);
         if (!timerOn && status === 'active') {
             dispatch(
                 addStatTask({
+                    createDate: new Date().toISOString(),
                     workTime: workTime - timeLeft,
                     pauseTime: pauseTime,
                     counterPause: counterPause,
@@ -81,6 +82,7 @@ export const handleStopTimerFunction = ({
         } else {
             dispatch(
                 addStatTask({
+                    createDate: new Date().toISOString(),
                     workTime: workTime - timeLeft,
                     pauseTime: pauseTime,
                     counterPause: counterPause,

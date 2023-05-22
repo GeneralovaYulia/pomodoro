@@ -6,14 +6,17 @@ import { ADD_ACTIVE_TASK, AddActiveTaskAction, UPDATE_ACTIVE_TASK_STATUS, UPDATE
 import { TasksState, tasksReducer } from './tasks/reducer';
 import { ADD_NEW_TASK, DECREMENT_COUNT, DELETE_TASK, INCREMENT_COUNT, SORT_LIST, UPDATE_TASKS } from './tasks/action';
 import { AddNewTaskAction, DecrementCount, DeleteTaskAction, IncrementCount, SortTasksAction, UpdateTasks } from './tasks/action';
-import { ActualDateState, actualDateReducer } from './actualDate/reducer';
-import { ACTUAL_DATE, ActualDateAction } from './actualDate/action';
+import { ActualBarState, actualBarReducer } from './actualBar/reducer';
+import { ACTUAL_BAR, ActualBarAction } from './actualBar/action';
+import { ACTUAL_PERIOD, ActualPeriodAction } from './actualPeriod/action';
+import { ActualPeriodState, actualPeriodReducer } from './actualPeriod/reducer';
 
 export interface RootState {
     tasks: TasksState;
     actualTimer: ActualTimerState;
     statisticsState: StatisticsState;
-    actualDate: ActualDateState;
+    actualBar: ActualBarState;
+    actualPeriod: ActualPeriodState;
 }
 
 const initialState: RootState = {
@@ -21,10 +24,16 @@ const initialState: RootState = {
         tasks: JSON.parse(localStorage.getItem('tasks') ?? '[]'),
     },
     statisticsState: {
-        stat: JSON.parse(localStorage.getItem('statistics') ?? '{}'),
+        stat: JSON.parse(localStorage.getItem('statistics') ?? '[]'),
     },
-    actualDate: {
-        actualDate: new Date().toLocaleDateString('en-US', { weekday: 'long' }),
+    actualBar: {
+        actualBar: {
+            workTime: 0,
+            pauseTime: 0,
+            pomodoros: 0,
+            counterPause: 0,
+            createDate: new Date(),
+        },
     },
     actualTimer: {
         actualTimer: {
@@ -38,6 +47,9 @@ const initialState: RootState = {
             counter: 0,
             pomodoro: 0
         }
+    },
+    actualPeriod: {
+        actualPeriod: 'thisWeek',
     }
 };
 
@@ -45,6 +57,7 @@ type MyAction =
     | AddStatAction
     | AddNewTaskAction
     | AddActiveTaskAction
+    | ActualPeriodAction
     | UpdateActiveTaskStatusAction
     | UpdateActiveTaskSuccessAction
     | SortTasksAction
@@ -52,7 +65,7 @@ type MyAction =
     | DecrementCount
     | DeleteTaskAction
     | UpdateTasks
-    | ActualDateAction;
+    | ActualBarAction;
 
 export const rootReducer: Reducer<RootState, MyAction> = (state = initialState, action) => {
     switch (action.type) {
@@ -78,10 +91,15 @@ export const rootReducer: Reducer<RootState, MyAction> = (state = initialState, 
                 ...state,
                 statisticsState: statisticsReducer(state.statisticsState, action),
             };
-        case ACTUAL_DATE:
+        case ACTUAL_BAR:
             return {
                 ...state,
-                actualDate: actualDateReducer(state.actualDate, action),
+                actualBar: actualBarReducer(state.actualBar, action),
+            };
+        case ACTUAL_PERIOD:
+            return {
+                ...state,
+                actualPeriod: actualPeriodReducer(state.actualPeriod, action),
             };
         default:
             return state;

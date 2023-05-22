@@ -14,14 +14,18 @@ import { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store/rootReducer';
 import { StatisticsState } from '../../store/statistics/reducer';
-import { actualDate } from '../../store/actualDate/action';
+import { actualBarAction } from '../../store/actualBar/action';
+import { getActualPeriod } from '../../hooks/getActualPeriod';
 
 export function BarChart() {
 	const stat = useSelector<RootState, StatisticsState>(
 		(state) => state.statisticsState
 	);
+	const actualPeriod = useSelector<RootState, string>(
+		(state) => state.actualPeriod.actualPeriod
+	);
 	const dispatch = useDispatch();
-	const data = stat.stat;
+	const data = getActualPeriod({ stat, actualPeriod });
 
 	Chart.register(
 		CategoryScale,
@@ -32,22 +36,11 @@ export function BarChart() {
 		Legend
 	);
 
-	const dataWorkTime = [
-		data.Monday ? data.Monday.workTime : 0,
-		data.Tuesday ? data.Tuesday.workTime : 0,
-		data.Wednesday ? data.Wednesday.workTime : 0,
-		data.Thursday ? data.Thursday.workTime : 0,
-		data.Friday ? data.Friday.workTime : 0,
-		data.Saturday ? data.Saturday.workTime : 0,
-		data.Sunday ? data.Sunday.workTime : 0,
-	];
-
-	const labels = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'];
 	const barChartData = {
-		labels,
+		labels: data.labels,
 		datasets: [
 			{
-				data: dataWorkTime,
+				data: data.array,
 				label: 'workTime',
 				borderColor: '#EA8A79',
 				backgroundColor: '#EA8A79',
@@ -101,19 +94,12 @@ export function BarChart() {
 				{ intersect: true },
 				true
 			);
-			const index = clickedElements[0].index;
-			const daysOfWeek = [
-				'Monday',
-				'Tuesday',
-				'Wednesday',
-				'Thursday',
-				'Friday',
-				'Saturday',
-				'Sunday',
-			];
-			const day = daysOfWeek[index];
 
-			dispatch(actualDate(day));
+			if (clickedElements[0]) {
+				const index = clickedElements[0].index;
+				const actualBar = data.weekArray[index];
+				dispatch(actualBarAction(actualBar));
+			}
 		}
 	};
 

@@ -13,7 +13,7 @@ Chart.register(CategoryScale);
 
 interface IDashBoard {
 	workTime: number;
-	actualDate: string;
+	actualDate: number;
 	pauseTime: number;
 	counterPause: number;
 	pomodoros: number;

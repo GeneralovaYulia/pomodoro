@@ -11,7 +11,7 @@ export function TodoList() {
 	const todoList = useSelector<RootState, ITask[]>((state) => state.tasks.tasks);
 	//const [tasksList, setTasksList] = useState(todoList);
 	const disparch = useDispatch();
-
+console.log(todoList)
 	//useEffect(() => {
 	//  setTasksList(todoList)
 	//}, [todoList])

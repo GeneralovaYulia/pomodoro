@@ -3,7 +3,7 @@ import styles from './daycard.module.css';
 
 interface IDayCard {
 	workTime: number;
-	actualDate: string;
+	actualDate: number;
 }
 
 function getWord(value: number, words: [string, string, string]) {
@@ -60,9 +60,20 @@ export function DayCard({ workTime, actualDate }: IDayCard) {
 		}
 	}
 
+	const daysOfWeek = [
+		'Sunday',
+		'Monday',
+		'Tuesday',
+		'Wednesday',
+		'Thursday',
+		'Friday',
+		'Saturday',
+	];
+	const day = daysOfWeek[actualDate];
+
 	return (
 		<div className={styles.dayCard}>
-			<h2 className={styles.dayCard_title}>{actualDate}</h2>
+			<h2 className={styles.dayCard_title}>{day}</h2>
 			<p className={styles.dayCard_text}>
 				{describe}
 				<span className={styles.dayCard_time}>{time}</span>

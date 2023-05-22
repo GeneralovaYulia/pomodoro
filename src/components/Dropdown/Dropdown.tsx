@@ -9,15 +9,10 @@ interface IDropdownProps {
 	onClose?: () => void;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-empty-function
-const NOOP = () => {};
-
 export function Dropdown({
 	button,
 	children,
 	isOpen,
-	onOpen = NOOP,
-	onClose = NOOP,
 }: IDropdownProps) {
 	const [isDropdownOpen, setIsDropdownOpen] = React.useState(false);
 

@@ -5,6 +5,8 @@ import { ITask } from "../store/actualTimer/reducer";
 import { addStatTask } from "../store/statistics/action";
 import { addActiveTask } from "../store/actualTimer/action";
 import { deleteTaskList, updateTasks } from "../store/tasks/action";
+import useSound from 'use-sound';
+import song from '../utils/music/song.mp3';
 
 interface ITimerHook {
     status: string;
@@ -37,15 +39,18 @@ export const useTimerFunctions = ({
     const dispatch = useDispatch<any>();
     const timerCurrent = useSelector<RootState, ITask>((state) => state.actualTimer.actualTimer);
     let timer: string | number | NodeJS.Timeout | undefined;
+    const [play] = useSound(song);
 
     useEffect(() => {
         if (timerOn && timeLeft > 0) {
             timer = setInterval(() => setTimeLeft(timeLeft - 1), 1000);
         } else if (timeLeft === 0) {
+            play();
             setTimerOn(false);
             setPomodoro(pomodoro + 1);
             dispatch(
                 addStatTask({
+                    createDate: new Date().toISOString(),
                     workTime: workTime - timeLeft,
                     pauseTime: pauseTime,
                     counterPause: counterPause,

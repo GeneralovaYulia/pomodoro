@@ -33,7 +33,7 @@ const actualTimerState: ActualTimerState = {
     },
 };
 
-type ActiveTimerAction =
+export type ActiveTimerAction =
     | AddActiveTaskAction
     | UpdateActiveTaskStatusAction
     | UpdateActiveTaskSuccessAction;
