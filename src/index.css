@@ -41,7 +41,8 @@ code {
   list-style: none;
 }
 
-ul {
+ul, li {
+  outline: none;
   margin: 0;
   padding: 0;
   list-style: none;

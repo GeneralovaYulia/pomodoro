@@ -12,3 +12,4 @@ export * from './IconCardFocus';
 export * from './IconCardPause';
 export * from './IconCardStop';
 export * from './IconTomatoSmall';
+export * from './IConPlusClose';

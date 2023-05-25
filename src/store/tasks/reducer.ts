@@ -1,5 +1,5 @@
 import { Reducer } from 'redux';
-import { ADD_NEW_TASK, DECREMENT_COUNT, DELETE_TASK, INCREMENT_COUNT, SORT_LIST, UPDATE_TASKS } from './action';
+import { ADD_NEW_TASK, ADIT_TITLE_TASK, AditTitleTaskAction, DECREMENT_COUNT, DELETE_TASK, INCREMENT_COUNT, SORT_LIST, UPDATE_TASKS, aditTitle } from './action';
 import { AddNewTaskAction, DecrementCount, DeleteTaskAction, IncrementCount, SortTasksAction, UpdateTasks, addNew, decrement, deleteTask, increment, sort, update } from './action';
 
 export type ITimer = {
@@ -30,7 +30,8 @@ type MyAction =
     | IncrementCount
     | DecrementCount
     | DeleteTaskAction
-    | UpdateTasks;
+    | UpdateTasks
+    | AditTitleTaskAction;
 
 export const tasksReducer: Reducer<TasksState, MyAction> = (state = initialState, action) => {
     switch (action.type) {
@@ -64,6 +65,11 @@ export const tasksReducer: Reducer<TasksState, MyAction> = (state = initialState
                 ...state,
                 tasks: update(state, action.id),
             };
+            case ADIT_TITLE_TASK:
+                return {
+                    ...state,
+                    tasks: aditTitle(state, action.task)
+                }
         default:
             return state;
     }

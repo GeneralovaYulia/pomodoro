@@ -6,28 +6,20 @@ import {
 	IconDropdownMinus,
 	IconDropdownPlus,
 } from '../../Icons';
-import { useDispatch } from 'react-redux';
-import { decrementCount, deleteTaskList, incrementCount } from '../../../store/tasks/action';
 
 export interface IMenuItemsList {
-	id?: string;
+	handleClickIncrement: () => void;
+	handleClickDecrement: () => void;
+	handleClickDelete: () => void;
+	handleClickEdit: () => void;
 }
 
-export function MenuItemsList({ id }: IMenuItemsList) {
-	const dispatch = useDispatch();
-
-	function handleClickIncrement() {
-		dispatch(incrementCount(id));
-	}
-
-	function handleClickDecrement() {
-		dispatch(decrementCount(id));
-	}
-
-	function handleClickDelete() {
-		dispatch(deleteTaskList(id));
-	}
-
+export function MenuItemsList({
+	handleClickIncrement,
+	handleClickDecrement,
+	handleClickDelete,
+	handleClickEdit,
+}: IMenuItemsList) {
 	return (
 		<ul className={styles.menuItemsList}>
 			<li className={styles.menuItem + ' ' + styles.mobileMenuIten}>
@@ -51,16 +43,13 @@ export function MenuItemsList({ id }: IMenuItemsList) {
 				</button>
 			</li>
 			<li className={styles.menuItem + ' ' + styles.mobileMenuIten}>
-				<button className={styles.buttonMenu}>
+				<button className={styles.buttonMenu} onClick={handleClickEdit}>
 					<IconDropdownEdit />
 					<span className={styles.buttonText}>Редактировать</span>
 				</button>
 			</li>
 			<li className={styles.menuItem + ' ' + styles.mobileMenuIten}>
-				<button
-					className={styles.buttonMenu}
-					onClick={handleClickDelete}
-				>
+				<button className={styles.buttonMenu} onClick={handleClickDelete}>
 					<IconDropdownDelete />
 					<span className={styles.buttonText}>Удалить</span>
 				</button>

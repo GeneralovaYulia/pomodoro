@@ -96,6 +96,7 @@ export function BarChart() {
 			);
 
 			if (clickedElements[0]) {
+				console.log(clickedElements[0])
 				const index = clickedElements[0].index;
 				const actualBar = data.weekArray[index];
 				dispatch(actualBarAction(actualBar));

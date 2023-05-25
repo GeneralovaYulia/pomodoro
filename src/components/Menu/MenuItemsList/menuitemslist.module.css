@@ -7,6 +7,10 @@
     align-items: center;
 }
 
+.menuItem:hover {
+    background-color: var(--white1);
+}
+
 .buttonMenu {
     align-items: center;
     display: flex;

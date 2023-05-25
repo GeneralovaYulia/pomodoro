@@ -1,5 +1,10 @@
-import React from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
 import styles from './dropdown.module.css';
+import { Modal } from '../Modal';
+import { modalContext } from '../Context/modalContext';
+import { optionContext } from '../Context/optionContext';
+import { useDispatch } from 'react-redux';
+import { deleteTaskList } from '../../store/tasks/action';
 
 interface IDropdownProps {
 	button: React.ReactNode;
@@ -12,18 +17,43 @@ interface IDropdownProps {
 export function Dropdown({
 	button,
 	children,
-	isOpen,
 }: IDropdownProps) {
 	const [isDropdownOpen, setIsDropdownOpen] = React.useState(false);
+	const { value, onChange } = useContext(modalContext);
+	const { option, optionChange } = useContext(optionContext);
+	const ref = useRef<HTMLDivElement>(null);
+	const dispatch = useDispatch();
+
+	function handleChange() {
+		dispatch(deleteTaskList(option));
+		onChange(false);
+	}
+
+	const onClose = () => handleChange();
+
+	useEffect(() => {
+		function handleClick(event: MouseEvent) {
+			if (
+				event.target instanceof Node &&
+				!ref.current?.contains(event.target)
+			) {
+				setIsDropdownOpen(false);
+			}
+		}
+
+		document.addEventListener('click', handleClick);
+
+		return () => {
+			document.removeEventListener('click', handleClick);
+		};
+	}, []);
 
 	const handleOpen = () => {
-		if (isOpen === undefined) {
-			setIsDropdownOpen(!isDropdownOpen);
-		}
+		setIsDropdownOpen(!isDropdownOpen);
 	};
 
 	return (
-		<div className={styles.container}>
+		<div className={styles.container} ref={ref}>
 			<div onClick={handleOpen}>{button}</div>
 			{isDropdownOpen && (
 				<div className={styles.listContainer}>
@@ -34,6 +64,12 @@ export function Dropdown({
 						{children}
 					</div>
 				</div>
+			)}
+			{value && (
+				<Modal
+					visible={value}
+					onClose={onClose}
+				/>
 			)}
 		</div>
 	);

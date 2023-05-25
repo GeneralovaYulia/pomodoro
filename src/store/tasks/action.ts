@@ -75,9 +75,11 @@ export const decrementCount: ActionCreator<DecrementCount> = (id: string) => ({
 export function decrement(state: { tasks: ITask[] }, id: string) {
     const tasks = state.tasks;
     const index = tasks.findIndex((el) => el.id === id);
-    tasks[index].counter = tasks[index].counter - 1;
-    const serializedState = JSON.stringify(tasks);
-    localStorage.setItem('tasks', serializedState);
+    if (tasks[index].counter > 1) {
+        tasks[index].counter = tasks[index].counter - 1;
+        const serializedState = JSON.stringify(tasks);
+        localStorage.setItem('tasks', serializedState);
+    }
 
     return [...tasks];
 }
@@ -122,6 +124,27 @@ export function update(state: { tasks: ITask[] }, id: string) {
     const serializedState = JSON.stringify(tasks);
     localStorage.setItem('tasks', serializedState);
     console.log(tasks)
+
+    return [...tasks];
+}
+
+export const ADIT_TITLE_TASK = 'ADIT_TITLE_TASK';
+export type AditTitleTaskAction = {
+    type: typeof ADIT_TITLE_TASK;
+    task: ITask;
+};
+
+export const aditTitleTask: ActionCreator<AditTitleTaskAction> = (task) => ({
+    type: ADIT_TITLE_TASK,
+    task,
+});
+
+export function aditTitle(state: { tasks: ITask[] }, task: ITask) {
+    const tasks = state.tasks;
+    const index = tasks.findIndex((el) => el.id === task.id);
+    tasks[index].title = task.title;
+    const serializedState = JSON.stringify(tasks);
+    localStorage.setItem('tasks', serializedState);
 
     return [...tasks];
 }

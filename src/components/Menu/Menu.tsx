@@ -5,10 +5,18 @@ import { MenuItemsList } from './MenuItemsList';
 import { Dropdown } from '../Dropdown';
 
 export interface IMenu {
-	id: string;
+	handleClickIncrement: () => void;
+	handleClickDecrement: () => void;
+	handleClickDelete: () => void;
+	handleClickEdit: () => void;
 }
 
-export function Menu({ id }: IMenu) {
+export function Menu({
+	handleClickIncrement,
+	handleClickDecrement,
+	handleClickDelete,
+	handleClickEdit,
+}: IMenu) {
 	return (
 		<div className={styles.menu}>
 			<Dropdown
@@ -19,7 +27,12 @@ export function Menu({ id }: IMenu) {
 				}
 			>
 				<div className={styles.menuItemsList}>
-					<MenuItemsList id={id} />
+					<MenuItemsList
+						handleClickIncrement={handleClickIncrement}
+						handleClickDecrement={handleClickDecrement}
+						handleClickDelete={handleClickDelete}
+						handleClickEdit={handleClickEdit}
+					/>
 				</div>
 			</Dropdown>
 		</div>

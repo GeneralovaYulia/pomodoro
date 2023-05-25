@@ -25,3 +25,14 @@
     color: var(--black);
     margin-right: auto;
 }
+
+.titleEdit {
+    outline: none;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 17px;
+    color: var(--black);
+    border: none;
+    background-color: var(--white1);
+    margin-right: auto;
+}

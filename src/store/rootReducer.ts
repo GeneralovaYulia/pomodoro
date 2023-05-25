@@ -4,7 +4,7 @@ import { ADD_STAT, AddStatAction } from './statistics/action';
 import { ActualTimerState, actualTimerReducer } from './actualTimer/reducer';
 import { ADD_ACTIVE_TASK, AddActiveTaskAction, UPDATE_ACTIVE_TASK_STATUS, UPDATE_ACTIVE_TASK_SUCCESS, UpdateActiveTaskStatusAction, UpdateActiveTaskSuccessAction } from './actualTimer/action';
 import { TasksState, tasksReducer } from './tasks/reducer';
-import { ADD_NEW_TASK, DECREMENT_COUNT, DELETE_TASK, INCREMENT_COUNT, SORT_LIST, UPDATE_TASKS } from './tasks/action';
+import { ADD_NEW_TASK, ADIT_TITLE_TASK, AditTitleTaskAction, DECREMENT_COUNT, DELETE_TASK, INCREMENT_COUNT, SORT_LIST, UPDATE_TASKS } from './tasks/action';
 import { AddNewTaskAction, DecrementCount, DeleteTaskAction, IncrementCount, SortTasksAction, UpdateTasks } from './tasks/action';
 import { ActualBarState, actualBarReducer } from './actualBar/reducer';
 import { ACTUAL_BAR, ActualBarAction } from './actualBar/action';
@@ -65,7 +65,8 @@ type MyAction =
     | DecrementCount
     | DeleteTaskAction
     | UpdateTasks
-    | ActualBarAction;
+    | ActualBarAction
+    | AditTitleTaskAction;
 
 export const rootReducer: Reducer<RootState, MyAction> = (state = initialState, action) => {
     switch (action.type) {
@@ -82,6 +83,7 @@ export const rootReducer: Reducer<RootState, MyAction> = (state = initialState, 
         case DECREMENT_COUNT:
         case DELETE_TASK:
         case UPDATE_TASKS:
+        case ADIT_TITLE_TASK:
             return {
                 ...state,
                 tasks: tasksReducer(state.tasks, action),
