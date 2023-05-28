@@ -21,11 +21,11 @@ export function Selection() {
 		<div className={styles.dropdown}>
 			<div
 				className={styles.dropdownBtn}
-				onClick={(e) => setIsActive(!isActive)}
+				onClick={() => setIsActive(!isActive)}
 			>
 				{selectedOption.label}
 				<span>
-					<IconChoice />
+					<IconChoice isActive={isActive} />
 				</span>
 			</div>
 			{isActive && (
@@ -33,7 +33,7 @@ export function Selection() {
 					{sortOptions.map((option) => (
 						<div
 							key={option.value}
-							onClick={(e) => {
+							onClick={() => {
 								dispatch(actualPeriodAction(option.value));
 								setSelectedOption(option);
 								setIsActive(false);

@@ -123,7 +123,6 @@ export function update(state: { tasks: ITask[] }, id: string) {
     tasks[index].counter = tasks[index].counter - 1;
     const serializedState = JSON.stringify(tasks);
     localStorage.setItem('tasks', serializedState);
-    console.log(tasks)
 
     return [...tasks];
 }

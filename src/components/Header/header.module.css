@@ -24,12 +24,21 @@
 .statistics {
   display: flex;
   align-items: center;
+  color: var(--red);
+  fill: var(--red);
 }
 
-.statistics_title {
+.statistics:hover {
+  color: var(--red-hard);
+}
+
+.statistics:hover svg path {
+  fill: var(--red-hard);
+}
+
+.statisticsTitle {
   font-weight: 400;
   font-size: 16px;
   line-height: 17px;
   padding-left: 9px;
-  color: var(--red);
 }

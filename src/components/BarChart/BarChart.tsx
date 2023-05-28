@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './barchart.module.css';
 import {
 	Chart,
@@ -26,6 +26,8 @@ export function BarChart() {
 	);
 	const dispatch = useDispatch();
 	const data = getActualPeriod({ stat, actualPeriod });
+	const chartRef = useRef(null);
+	const [isIndex, setIsIndex] = useState(0);
 
 	Chart.register(
 		CategoryScale,
@@ -36,14 +38,17 @@ export function BarChart() {
 		Legend
 	);
 
+	useEffect(() => {
+		//console.log(isIndex)
+	})
+
 	const barChartData = {
 		labels: data.labels,
 		datasets: [
 			{
 				data: data.array,
 				label: 'workTime',
-				borderColor: '#EA8A79',
-				backgroundColor: '#EA8A79',
+				backgroundColor: ['#EA8A79'],
 			},
 		],
 	};
@@ -76,39 +81,37 @@ export function BarChart() {
 				display: false,
 				position: 'top' as const,
 			},
-			title: {
-				display: false,
-				text: 'Chart.js Bar Chart',
-			},
+		},
+		onClick: (event: any) => {
+			if (!chartRef.current) return;
+			const chart = Chart.getChart(chartRef.current);
+
+			if (chart) {
+				const clickedElements = chart.getElementsAtEventForMode(
+					event,
+					'nearest',
+					{ intersect: true },
+					true
+				);
+
+				if (clickedElements.length > 0) {
+					const index = clickedElements[0].index;
+					setIsIndex(index);
+					const datasetIndex = clickedElements[0].datasetIndex;
+					chart.data.datasets[datasetIndex].backgroundColor =
+						'#DC3E22';
+					chart.update();
+					const actualBar = data.weekArray[index];
+					dispatch(actualBarAction(actualBar));
+				}
+			}
 		},
 	};
 
-	const chartRef = useRef(null);
-	const onClick = (event: any) => {
-		if (!chartRef.current) return;
-		const chart = Chart.getChart(chartRef.current);
-		if (chart) {
-			const clickedElements = chart.getElementsAtEventForMode(
-				event,
-				'nearest',
-				{ intersect: true },
-				true
-			);
-
-			if (clickedElements[0]) {
-				console.log(clickedElements[0])
-				const index = clickedElements[0].index;
-				const actualBar = data.weekArray[index];
-				dispatch(actualBarAction(actualBar));
-			}
-		}
-	};
-
 	return (
-		<div className={styles.chart_container}>
+		<div className={styles.chartContainer} ref={chartRef}>
 			<Bar
 				ref={chartRef}
-				onClick={onClick}
 				data={barChartData}
 				options={options}
 			/>

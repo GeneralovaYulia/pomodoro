@@ -5,8 +5,33 @@ import { Container } from 'react-bootstrap';
 import { FormToDo } from '../FormToDo';
 import { TimerWindows } from '../TimerWindows';
 import { TodoList } from '../TodoList';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store/rootReducer';
+import { ITask } from '../../store/tasks/reducer';
 
 export function MainPage() {
+	const tasks = useSelector<RootState, ITask[]>(state => state.tasks.tasks);
+
+	const tasksWork = [];
+
+	for (let i = 0; i < tasks.length; i++) {
+		tasksWork.push(tasks[i].timer.startTime);
+	}
+	
+	const totalTime = tasksWork.reduce(function (currentSum, currentNumber) {
+		return currentSum + currentNumber
+	}, 0)
+
+	const minutes = Math.floor(totalTime / 60);
+	const hours = Math.floor(minutes / 60);
+	let time;
+
+	if (hours === 0) {
+		time = minutes + ' ' + 'мин'
+	} else {
+		time = hours + ' '  +  'ч' + ' ' + minutes + ' ' + 'мин'
+	}
+
 	return (
 		<>
 			<Header />
@@ -39,7 +64,7 @@ export function MainPage() {
 						</ul>
 						<FormToDo />
 						<TodoList />
-						<div className={styles.totalTime}>25 мин</div>
+						<div className={styles.totalTime}>{time}</div>
 					</div>
 					<div className={styles.timerWindows}>
 						<TimerWindows />

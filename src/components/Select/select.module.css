@@ -40,7 +40,7 @@
     box-shadow: 0px 10px 63px 0px hsla(0, 0%, 0%, 0.07);
 }
 
-.dropdown .dropdownBtn {
+.dropdownBtn {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -52,9 +52,10 @@
     line-height: 17px;
     color: var(--black);
     background-color: var(--white1);
+    cursor: pointer;
 }
 
-.dropdown .dropdownContent {
+.dropdownContent {
     position: absolute;
     top: 100%;
     background-color: var(--white1);
@@ -71,5 +72,6 @@
     color: var(--black);
     background-color: var(--white1);
     border-top: 1px solid var(--gray-de);
+    cursor: pointer;
 }
 

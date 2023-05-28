@@ -16,7 +16,7 @@ export function Header() {
 					</Link>
 					<Link to={'/stat'} className={styles.statistics}>
 						<IconStatistics />
-						<div className={styles.statistics_title}>
+						<div className={styles.statisticsTitle}>
 							Статистика
 						</div>
 					</Link>

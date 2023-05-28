@@ -1,8 +1,10 @@
 import React from 'react';
+import styles from './Icon.module.css';
 
 export function IconPlusButtonTime() {
 	return (
 		<svg
+			className={styles.button}
 			width="50"
 			height="50"
 			viewBox="0 0 50 50"

@@ -11,7 +11,7 @@ export function TomatoCounter({ pomodoros }: ITomatoCounter) {
 		<div className={styles.tomatoCounter}>
 			{pomodoros !== 0 && (
 				<>
-					<div className={styles.tomapoSmall}>
+					<div className={styles.tomatoSmall}>
 						<IconTomatoSmall />
 					</div>
 					<div className={styles.bottomBlock}>

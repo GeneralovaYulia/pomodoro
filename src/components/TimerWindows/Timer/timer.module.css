@@ -30,6 +30,11 @@
     margin-right: 25px;
 }
 
+.buttonStart:hover {
+    background-color: var(--green-middle);
+    color: var(--white);
+}
+
 .buttonStop {
     min-width: 145px;
     height: 55px;
@@ -42,6 +47,12 @@
     color: var(--grayC4);
 }
 
+.buttonStop:hover {
+    background-color: var(--red-hard);
+    border: 1px solid var(--red-hard);
+    color: var(--white);
+}
+
 .buttonStopRed {
     min-width: 145px;
     height: 55px;
@@ -52,4 +63,10 @@
     background-color: initial;
     border: 1px solid var(--red);
     color: var(--red);
+}
+
+.buttonStopRed:hover {
+    background-color: var(--red-hard);
+    border: 1px solid var(--red-hard);
+    color: var(--white);
 }
