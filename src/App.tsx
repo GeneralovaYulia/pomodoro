@@ -1,4 +1,3 @@
-import './App.css';
 import React, { useState } from 'react';
 import { Layout } from './components/Layout';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
@@ -6,8 +5,9 @@ import { MainPage } from './components/MainPage';
 import { StatPage } from './components/StatPage';
 import { Provider } from 'react-redux';
 import { store } from './store/store';
-import { modalContext } from './components/Context/modalContext';
-import { optionContext } from './components/Context/optionContext';
+import { modalContext } from './components/Contexts/modalContext';
+import { optionContext } from './components/Contexts/optionContext';
+import { useColorTheme } from './hooks/useColorTheme';
 
 export function App() {
 	const [modalValue, setModalValue] = useState(false);
@@ -15,6 +15,11 @@ export function App() {
 
 	const [optionValue, setOptionValue] = useState('');
 	const OptionProvider = optionContext.Provider;
+
+	const { colorTheme, toggleColorTheme } = useColorTheme();
+	const onChangeTheme = () => {
+		toggleColorTheme();
+	};
 
 	return (
 		<Provider store={store}>
@@ -33,8 +38,18 @@ export function App() {
 					<BrowserRouter>
 						<Layout>
 							<Routes>
-								<Route path="/" element={<MainPage />} />
-								<Route path="/stat" element={<StatPage />} />
+								<Route
+									path="/"
+									element={
+										<MainPage onClick={onChangeTheme} />
+									}
+								/>
+								<Route
+									path="/stat"
+									element={
+										<StatPage onClick={onChangeTheme} />
+									}
+								/>
 							</Routes>
 						</Layout>
 					</BrowserRouter>

@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import styles from './modal.module.css';
-import { modalContext } from '../Context/modalContext';
+import { modalContext } from '../Contexts/modalContext';
 import { IconPlusClose } from '../Icons';
 
 interface ModalProps {

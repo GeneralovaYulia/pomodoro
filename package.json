@@ -24,7 +24,8 @@
     "react-select": "^5.7.3",
     "redux": "^4.2.1",
     "redux-devtools-extension": "^2.13.9",
-    "sass": "^1.62.0",
+    "sass": "^1.62.1",
+    "styled-components": "^5.3.11",
     "use-sound": "^4.0.1",
     "web-vitals": "^2.1.4"
   },
@@ -66,6 +67,7 @@
     ]
   },
   "devDependencies": {
+    "@types/styled-components": "^5.1.26",
     "@typescript-eslint/eslint-plugin": "^5.58.0",
     "@typescript-eslint/parser": "^5.58.0",
     "eslint": "^8.38.0",

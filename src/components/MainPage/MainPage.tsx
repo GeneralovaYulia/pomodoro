@@ -9,7 +9,11 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../store/rootReducer';
 import { ITask } from '../../store/tasks/reducer';
 
-export function MainPage() {
+interface IMainPage {
+	onClick: () => void;
+}
+
+export function MainPage({onClick}: IMainPage) {
 	const tasks = useSelector<RootState, ITask[]>(state => state.tasks.tasks);
 
 	const tasksWork = [];
@@ -34,7 +38,7 @@ export function MainPage() {
 
 	return (
 		<>
-			<Header />
+			<Header onClick={onClick} />
 			<Container>
 				<div className={styles.main}>
 					<div className={styles.listBlock}>

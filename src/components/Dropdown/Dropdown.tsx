@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useRef } from 'react';
 import styles from './dropdown.module.css';
 import { Modal } from '../Modal';
-import { modalContext } from '../Context/modalContext';
-import { optionContext } from '../Context/optionContext';
+import { modalContext } from '../Contexts/modalContext';
+import { optionContext } from '../Contexts/optionContext';
 import { useDispatch } from 'react-redux';
 import { deleteTaskList } from '../../store/tasks/action';
 

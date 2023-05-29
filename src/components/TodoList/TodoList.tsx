@@ -11,8 +11,8 @@ import {
 	sortTasks,
 } from '../../store/tasks/action';
 import { ITask } from '../../store/tasks/reducer';
-import { modalContext } from '../Context/modalContext';
-import { optionContext } from '../Context/optionContext';
+import { modalContext } from '../Contexts/modalContext';
+import { optionContext } from '../Contexts/optionContext';
 
 export function TodoList() {
 	const todoList = useSelector<RootState, ITask[]>(

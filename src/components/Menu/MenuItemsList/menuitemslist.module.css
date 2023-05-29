@@ -20,4 +20,5 @@
 
 .buttonText {
     padding-left: 10px;
+    color: var(--black);
 }

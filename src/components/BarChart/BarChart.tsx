@@ -16,6 +16,7 @@ import { RootState } from '../../store/rootReducer';
 import { StatisticsState } from '../../store/statistics/reducer';
 import { actualBarAction } from '../../store/actualBar/action';
 import { getActualPeriod } from '../../hooks/getActualPeriod';
+import getTimeForChart from '../../hooks/getTimeForChart';
 
 export function BarChart() {
 	const stat = useSelector<RootState, StatisticsState>(
@@ -49,6 +50,8 @@ export function BarChart() {
 				data: data.array,
 				label: 'workTime',
 				backgroundColor: ['#EA8A79'],
+				hoverBackgroundColor: '#DC3E22',
+				color: '#DC3E22',
 			},
 		],
 	};
@@ -60,11 +63,14 @@ export function BarChart() {
 			y: {
 				position: 'right' as const,
 				ticks: {
+					callback: function (value: any) {
+						return getTimeForChart(value as number, ' ч', ' мин', ' ');
+					},
 					stepSize: 25,
 					font: {
 						size: 12,
 					},
-					color: '#333333',
+					color: '#999999',
 				},
 			},
 			x: {
@@ -72,7 +78,7 @@ export function BarChart() {
 					font: {
 						size: 24,
 					},
-					color: '#333333',
+					color: '#999999',
 				},
 			},
 		},

@@ -5,7 +5,11 @@ import { IconStatistics } from '../Icons/IconStatistics';
 import { Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-export function Header() {
+interface IHeader {
+	onClick: () => void;
+}
+
+export function Header({ onClick }: IHeader) {
 	return (
 		<header className={styles.header}>
 			<Container>
@@ -14,11 +18,19 @@ export function Header() {
 						<IconPomodoro />
 						<div className={styles.header_title}>pomodoro_box</div>
 					</Link>
+					<div className={styles.theme}>
+						<span>Темная тема</span>
+
+							<input
+								type="checkbox"
+								className={styles.switcher}
+								onChange={onClick}
+							/>
+
+					</div>
 					<Link to={'/stat'} className={styles.statistics}>
 						<IconStatistics />
-						<div className={styles.statisticsTitle}>
-							Статистика
-						</div>
+						<div className={styles.statisticsTitle}>Статистика</div>
 					</Link>
 				</nav>
 			</Container>

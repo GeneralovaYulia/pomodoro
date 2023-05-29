@@ -8,7 +8,11 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../store/rootReducer';
 import { IStat, StatisticsState } from '../../store/statistics/reducer';
 
-export function StatPage() {
+interface IStatPage {
+	onClick: () => void;
+}
+
+export function StatPage({onClick}: IStatPage) {
 	const stat = useSelector<RootState, StatisticsState>(
 		(state) => state.statisticsState
 	);
@@ -34,7 +38,7 @@ export function StatPage() {
 
 	return (
 		<>
-			<Header />
+			<Header onClick={onClick} />
 			<main>
 				<Container>
 					<div className={styles.DashDoard}>
