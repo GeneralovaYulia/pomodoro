@@ -17,6 +17,7 @@ export function App() {
 	const OptionProvider = optionContext.Provider;
 
 	const { colorTheme, toggleColorTheme } = useColorTheme();
+
 	const onChangeTheme = () => {
 		toggleColorTheme();
 	};

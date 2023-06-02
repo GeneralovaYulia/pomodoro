@@ -34,7 +34,7 @@ export const handleStartTimerFunction = ({
 				counter: timerCurrent.counter,
 				pomodoro: timerCurrent.pomodoro,
 			})
-			);
+			);			
 		} else {
 			setCounterPause(counterPause + 1);
 			setTimerOn(false);

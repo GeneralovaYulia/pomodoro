@@ -9,10 +9,6 @@ export function FormToDo() {
 	const [tasks, setTasks] = useState('');
 	const dispatch = useDispatch();
 
-	//function handleChange(e: ChangeEvent<HTMLInputElement>) {
-	//	setTasks(e.currentTarget.value);
-	//}
-
 	function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
 		event.preventDefault();
 		if (!tasks) return;

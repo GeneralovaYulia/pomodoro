@@ -8,6 +8,7 @@ import { TodoList } from '../TodoList';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store/rootReducer';
 import { ITask } from '../../store/tasks/reducer';
+import { IStat } from '../../store/statistics/reducer';
 
 interface IMainPage {
 	onClick: () => void;

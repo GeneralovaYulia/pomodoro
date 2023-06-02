@@ -7,8 +7,10 @@ import { addActiveTask } from "../store/actualTimer/action";
 import { deleteTaskList, updateTasks } from "../store/tasks/action";
 import useSound from 'use-sound';
 import song from '../utils/music/song.mp3';
+import { timerTypeAction } from "../store/timerType/action";
 
 interface ITimerHook {
+    timerType: string,
     status: string;
     timerOn: boolean;
     timeLeft: number;
@@ -23,6 +25,7 @@ interface ITimerHook {
 }
 
 export const useTimerFunctions = ({
+    timerType,
     status,
     timerOn,
     timeLeft,
@@ -48,33 +51,62 @@ export const useTimerFunctions = ({
             play();
             setTimerOn(false);
             setPomodoro(pomodoro + 1);
-            dispatch(
-                addStatTask({
-                    createDate: new Date().toISOString(),
-                    workTime: workTime - timeLeft,
-                    pauseTime: pauseTime,
-                    counterPause: counterPause,
-                    pomodoros: 1,
-                })
-            );
-            dispatch(
-                addActiveTask({
-                    title: timerCurrent.title,
-                    id: timerCurrent.id,
-                    timer: {
-                        timerStatus: "default",
-                        startTime: 300,
-                        nameTitle: timerCurrent.title,
-                    },
-                    counter: timerCurrent.counter - 1,
-                    pomodoro: pomodoro + 1,
-                })
-            );
-            dispatch(updateTasks(timerCurrent.id));
 
-            if (timerCurrent.counter === 1) {
-                dispatch(deleteTaskList(timerCurrent.id));
-                setTimeLeft(300);
+            if (timerType === 'WorkTimer') {
+                dispatch(
+                    addStatTask({
+                        createDate: new Date().toISOString(),
+                        workTime: workTime - timeLeft,
+                        pauseTime: 0,
+                        counterPause: 0,
+                        pomodoros: 1,
+                    })
+                );
+                dispatch(
+                    addActiveTask({
+                        title: timerCurrent.title,
+                        id: timerCurrent.id,
+                        timer: {
+                            timerStatus: "default",
+                            startTime: 180,
+                            nameTitle: timerCurrent.title,
+                        },
+                        counter: timerCurrent.counter - 1,
+                        pomodoro: pomodoro + 1,
+                    })
+                );
+                dispatch(updateTasks(timerCurrent.id));
+    
+                if (timerCurrent.counter === 1) {
+                    dispatch(deleteTaskList(timerCurrent.id));
+                    setTimeLeft(300);
+                    dispatch(
+                        addActiveTask({
+                            title: "",
+                            id: "",
+                            timer: {
+                                timerStatus: "default",
+                                startTime: 300,
+                                nameTitle: "",
+                            },
+                            counter: "",
+                            pomodoro: "",
+                        })
+                    );
+                }
+                dispatch(timerTypeAction('PauseTimer'))
+            }
+
+            if (timerType === 'PauseTimer') {
+                dispatch(
+                    addStatTask({
+                        createDate: new Date().toISOString(),
+                        workTime: 0,
+                        pauseTime: workTime - timeLeft,
+                        counterPause: 1,
+                        pomodoros: 0,
+                    })
+                );
                 dispatch(
                     addActiveTask({
                         title: "",
@@ -88,6 +120,7 @@ export const useTimerFunctions = ({
                         pomodoro: "",
                     })
                 );
+                dispatch(timerTypeAction('WorkTimer'));
             }
 
             return () => clearInterval(timer);

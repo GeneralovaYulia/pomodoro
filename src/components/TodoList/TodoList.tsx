@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import styles from './todolist.module.css';
 import { Menu } from '../Menu';
 import { useDispatch, useSelector } from 'react-redux';
@@ -18,27 +18,49 @@ export function TodoList() {
 	const todoList = useSelector<RootState, ITask[]>(
 		(state) => state.tasks.tasks
 	);
+
+	const activeTimer = useSelector<RootState, ITask>(
+		(state) => state.actualTimer.actualTimer
+	);
+
 	const [isEdit, setIsEdit] = useState('');
 	const { value, onChange } = useContext(modalContext);
 	const { option, optionChange } = useContext(optionContext);
+	const [isReadOnly, setIsReadOnly] = useState(false);
 	const dispatch = useDispatch();
+	const status = activeTimer.timer.timerStatus;
+
+	useEffect(() => {
+		if (activeTimer.timer.timerStatus === 'default') {
+			setIsReadOnly(false);
+		}
+	}, [status, isReadOnly]);
 
 	const handleClick = (id: string) => {
-		const item = todoList.find((task) => task.id === id);
-		dispatch(
-			addActiveTask({
-				title: item?.title,
-				id: item?.id,
-				timer: {
-					timerStatus: 'default',
-					startTime: 300,
-					nameTitle: item?.title,
-				},
-				counter: item?.counter,
-				pomodoro: item?.pomodoro,
-			})
-		);
-		dispatch(sortTasks(item?.id));
+		if (activeTimer.timer.timerStatus === 'active') {
+			setIsReadOnly(true);
+		}
+
+		if (
+			activeTimer.timer.timerStatus === 'default' ||
+			activeTimer.timer.timerStatus === ''
+		) {
+			const item = todoList.find((task) => task.id === id);
+			dispatch(sortTasks(item?.id));
+			dispatch(
+				addActiveTask({
+					title: item?.title,
+					id: item?.id,
+					timer: {
+						timerStatus: 'default',
+						startTime: 300,
+						nameTitle: item?.title,
+					},
+					counter: item?.counter,
+					pomodoro: item?.pomodoro,
+				})
+			);
+		}
 	};
 
 	function handleClickIncrement(id: string) {
@@ -81,6 +103,7 @@ export function TodoList() {
 
 					{isEdit !== item.id && (
 						<button
+							disabled={isReadOnly}
 							className={styles.titleButton}
 							onClick={() => handleClick(item.id)}
 						>

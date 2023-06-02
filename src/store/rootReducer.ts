@@ -10,6 +10,8 @@ import { ActualBarState, actualBarReducer } from './actualBar/reducer';
 import { ACTUAL_BAR, ActualBarAction } from './actualBar/action';
 import { ACTUAL_PERIOD, ActualPeriodAction } from './actualPeriod/action';
 import { ActualPeriodState, actualPeriodReducer } from './actualPeriod/reducer';
+import { TimerTypeState, timerTypeReducer } from './timerType/reducer';
+import { TIMER_TYPE, TimerTypeAction } from './timerType/action';
 
 export interface RootState {
     tasks: TasksState;
@@ -17,6 +19,7 @@ export interface RootState {
     statisticsState: StatisticsState;
     actualBar: ActualBarState;
     actualPeriod: ActualPeriodState;
+    timerType: TimerTypeState;
 }
 
 const initialState: RootState = {
@@ -50,6 +53,9 @@ const initialState: RootState = {
     },
     actualPeriod: {
         actualPeriod: 'thisWeek',
+    },
+    timerType: {
+        timerType: 'WorkTimer',
     }
 };
 
@@ -66,7 +72,8 @@ type MyAction =
     | DeleteTaskAction
     | UpdateTasks
     | ActualBarAction
-    | AditTitleTaskAction;
+    | AditTitleTaskAction
+    | TimerTypeAction;
 
 export const rootReducer: Reducer<RootState, MyAction> = (state = initialState, action) => {
     switch (action.type) {
@@ -103,6 +110,11 @@ export const rootReducer: Reducer<RootState, MyAction> = (state = initialState, 
                 ...state,
                 actualPeriod: actualPeriodReducer(state.actualPeriod, action),
             };
+        case TIMER_TYPE:
+            return {
+                ...state,
+                timerType: timerTypeReducer(state.timerType, action)
+            }
         default:
             return state;
     }

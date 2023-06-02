@@ -2,8 +2,10 @@ import { ITask } from "../store/actualTimer/reducer";
 import { addActiveTask } from "../store/actualTimer/action";
 import { addStatTask } from "../store/statistics/action";
 import { deleteTaskList, updateTasks } from "../store/tasks/action";
+import { timerTypeAction } from "../store/timerType/action";
 
 interface IStopTimerHandler {
+    timerType: string,
     status: string;
     timerOn: boolean;
     timeLeft: number;
@@ -21,6 +23,7 @@ interface IStopTimerHandler {
 }
 
 export const handleStopTimerFunction = ({
+    timerType,
     status,
     timerOn,
     timeLeft,
@@ -38,13 +41,39 @@ export const handleStopTimerFunction = ({
 }: IStopTimerHandler) => {
     const stopTimer = () => {
         setTimerOn(false);
+        if (timerType === 'PauseTimer') {
+            dispatch(
+                addStatTask({
+                    createDate: new Date().toISOString(),
+                    workTime: workTime - timeLeft,
+                    pauseTime: pauseTime,
+                    counterPause: 0,
+                    pomodoros: 0,
+                })
+            );
+            dispatch(
+                addActiveTask({
+                    title: '',
+                        id: '',
+                        timer: {
+                            timerStatus: 'default',
+                            startTime: 300,
+                            nameTitle: '',
+                        },
+                        counter: '',
+                        pomodoro: '',
+                })
+            );
+            dispatch(timerTypeAction('WorkTimer'));
+            return; 
+        }
         if (!timerOn && status === 'active') {
             dispatch(
                 addStatTask({
                     createDate: new Date().toISOString(),
                     workTime: workTime - timeLeft,
                     pauseTime: pauseTime,
-                    counterPause: counterPause,
+                    counterPause: 0,
                     pomodoros: 1,
                 })
             );
@@ -85,7 +114,7 @@ export const handleStopTimerFunction = ({
                     createDate: new Date().toISOString(),
                     workTime: workTime - timeLeft,
                     pauseTime: pauseTime,
-                    counterPause: counterPause,
+                    counterPause: 0,
                     pomodoros: 0,
                 })
             );

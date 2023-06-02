@@ -1,22 +1,28 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styles from './barchart.module.css';
 import {
 	Chart,
 	CategoryScale,
 	LinearScale,
 	BarElement,
-	Title,
 	Tooltip,
 	Legend,
+	InteractionModeFunction,
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
 import { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store/rootReducer';
-import { StatisticsState } from '../../store/statistics/reducer';
+import { IStat, StatisticsState } from '../../store/statistics/reducer';
 import { actualBarAction } from '../../store/actualBar/action';
 import { getActualPeriod } from '../../hooks/getActualPeriod';
 import getTimeForChart from '../../hooks/getTimeForChart';
+
+declare module 'chart.js' {
+	interface InteractionModeMap {
+		myCustomMode: InteractionModeFunction;
+	}
+}
 
 export function BarChart() {
 	const stat = useSelector<RootState, StatisticsState>(
@@ -25,23 +31,15 @@ export function BarChart() {
 	const actualPeriod = useSelector<RootState, string>(
 		(state) => state.actualPeriod.actualPeriod
 	);
-	const dispatch = useDispatch();
-	const data = getActualPeriod({ stat, actualPeriod });
-	const chartRef = useRef(null);
-	const [isIndex, setIsIndex] = useState(0);
-
-	Chart.register(
-		CategoryScale,
-		LinearScale,
-		BarElement,
-		Title,
-		Tooltip,
-		Legend
+	const activeBar = useSelector<RootState, IStat>(
+		(state) => state.actualBar.actualBar
 	);
 
-	useEffect(() => {
-		//console.log(isIndex)
-	})
+	const dispatch = useDispatch();
+	const data = getActualPeriod({ stat, actualPeriod, activeBar });
+	const chartRef = useRef<any>();
+
+	Chart.register(CategoryScale, LinearScale, BarElement, Tooltip, Legend);
 
 	const barChartData = {
 		labels: data.labels,
@@ -49,9 +47,7 @@ export function BarChart() {
 			{
 				data: data.array,
 				label: 'workTime',
-				backgroundColor: ['#EA8A79'],
-				hoverBackgroundColor: '#DC3E22',
-				color: '#DC3E22',
+				backgroundColor: data.colorsBars,
 			},
 		],
 	};
@@ -64,7 +60,12 @@ export function BarChart() {
 				position: 'right' as const,
 				ticks: {
 					callback: function (value: any) {
-						return getTimeForChart(value as number, ' ч', ' мин', ' ');
+						return getTimeForChart(
+							value as number,
+							' мин',
+							' сек',
+							' '
+						);
 					},
 					stepSize: 25,
 					font: {
@@ -78,7 +79,7 @@ export function BarChart() {
 					font: {
 						size: 24,
 					},
-					color: '#999999',
+					color: data.colorsXlabels,
 				},
 			},
 		},
@@ -88,7 +89,7 @@ export function BarChart() {
 				position: 'top' as const,
 			},
 		},
-		onClick: (event: any) => {
+		onClick: (event: any): void => {
 			if (!chartRef.current) return;
 			const chart = Chart.getChart(chartRef.current);
 
@@ -102,11 +103,6 @@ export function BarChart() {
 
 				if (clickedElements.length > 0) {
 					const index = clickedElements[0].index;
-					setIsIndex(index);
-					const datasetIndex = clickedElements[0].datasetIndex;
-					chart.data.datasets[datasetIndex].backgroundColor =
-						'#DC3E22';
-					chart.update();
 					const actualBar = data.weekArray[index];
 					dispatch(actualBarAction(actualBar));
 				}
@@ -116,11 +112,7 @@ export function BarChart() {
 
 	return (
 		<div className={styles.chartContainer} ref={chartRef}>
-			<Bar
-				ref={chartRef}
-				data={barChartData}
-				options={options}
-			/>
+			<Bar ref={chartRef} data={barChartData} options={options} />
 		</div>
 	);
 }

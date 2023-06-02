@@ -24,7 +24,7 @@ export const handleIncrementTimerFunction = ({
                 title: timerCurrent.title,
                 id: timerCurrent.id,
                 timer: {
-                    timerStatus: 'default',
+                    timerStatus: 'active',
                     startTime: timeLeft + 60,
                     nameTitle: timerCurrent.title,
                 },

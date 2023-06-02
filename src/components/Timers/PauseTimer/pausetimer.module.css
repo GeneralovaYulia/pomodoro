@@ -1,0 +1,115 @@
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+    width: 733px;
+    height: 55px;
+    background-color: var(--green-light);
+}
+
+.headerGreen {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+    width: 733px;
+    height: 55px;
+    background-color: var(--green-light);
+}
+
+.titleToDo {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 17px;
+    color: var(--white);
+}
+
+.infoToDo {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 17px;
+    color: var(--white);
+}
+
+.screen {
+    align-items: center;
+    background-color: var(--white1);
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 107px;
+    padding-top: 70px;
+}
+
+.clock {
+    color: var(--black);
+    font-size: 150px;
+    font-weight: 200;
+    line-height: 179px;
+    position: relative;
+}
+
+.clockGreen {
+    color: var(--green-light);
+    font-size: 150px;
+    font-weight: 200;
+    line-height: 179px;
+    position: relative;
+}
+
+.titleTask {
+    margin-bottom: 32px;
+}
+
+.buttonStart {
+    min-width: 145px;
+    height: 55px;
+    padding: 0 50px;
+    background-color: var(--green-light);
+    color: var(--white);
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 17px;
+    margin-right: 25px;
+}
+
+.buttonStart:hover {
+    background-color: var(--green-middle);
+    color: var(--white);
+}
+
+.buttonStop {
+    min-width: 145px;
+    height: 55px;
+    padding: 0 50px;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 17px;
+    background-color: initial;
+    border: 1px solid var(--grayC4);
+    color: var(--grayC4);
+}
+
+.buttonStop:hover {
+    background-color: var(--red-hard);
+    border: 1px solid var(--red-hard);
+    color: var(--white);
+}
+
+.buttonStopRed {
+    min-width: 145px;
+    height: 55px;
+    padding: 0 50px;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 17px;
+    background-color: initial;
+    border: 1px solid var(--red);
+    color: var(--red);
+}
+
+.buttonStopRed:hover {
+    background-color: var(--red-hard);
+    border: 1px solid var(--red-hard);
+    color: var(--white);
+}

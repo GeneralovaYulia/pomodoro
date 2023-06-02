@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './cardfocus.module.css';
 import { IconCardFocus } from '../Icons';
+import { getFocusPercent } from '../../utils/getFocusPercent';
 
 interface ICardFocus {
 	pauseTime: number;
@@ -8,25 +9,15 @@ interface ICardFocus {
 }
 
 export function CardFocus({ pauseTime, workTime }: ICardFocus) {
-	let effectProcent;
-	if (workTime === 0 && pauseTime === 0) {
-		effectProcent = 0;
-	} else {
-		effectProcent = (workTime / (workTime + pauseTime)) * 100;
-	}
-
-	const procent = Math.floor(effectProcent);
-	const headerStyles =
-		workTime !== 0 ? styles.cardFocusActive : styles.cardFocus;
-	const color = workTime !== 0 ? '#FFAE35' : '#C4C4C4';
+	const percent = getFocusPercent(workTime, pauseTime);
 
 	return (
-		<div className={headerStyles}>
+		<div className={workTime !== 0 ? styles.cardFocusActive : styles.cardFocus}>
 			<div>
 				<h2 className={styles.cardFocus_title}>Фокус</h2>
-				<span className={styles.cardFocus_percent}>{procent}%</span>
+				<span className={styles.cardFocus_percent}>{percent}%</span>
 			</div>
-			<IconCardFocus color={color} />
+			<IconCardFocus color={workTime !== 0 ? '#FFAE35' : '#C4C4C4'} />
 		</div>
 	);
 }

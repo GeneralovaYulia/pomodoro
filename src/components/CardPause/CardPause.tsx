@@ -7,18 +7,13 @@ interface ICardPause {
 }
 
 export function CardPause({ pauseTime }: ICardPause) {
-	const headerStyles =
-		pauseTime !== 0 ? styles.cardPauseActive : styles.cardPause;
-	const color = pauseTime !== 0 ? '#9C97D7' : '#C4C4C4';
-	const minutes = Math.floor(pauseTime / 60);
-
 	return (
-		<div className={headerStyles}>
+		<div className={pauseTime !== 0 ? styles.cardPauseActive : styles.cardPause}>
 			<div>
 				<h2 className={styles.cardPause_title}>Время на паузе</h2>
-				<span className={styles.cardPause_percent}>{minutes}м</span>
+				<span className={styles.cardPause_percent}>{Math.floor(pauseTime / 60)}м</span>
 			</div>
-			<IconCardPause color={color} />
+			<IconCardPause color={pauseTime !== 0 ? '#9C97D7' : '#C4C4C4'} />
 		</div>
 	);
 }
