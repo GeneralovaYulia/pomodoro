@@ -23,14 +23,13 @@ export const getActualPeriod = ({ stat, actualPeriod, activeBar }: IGetActualPer
 		weekArray[i] = currentEl
 			? currentEl
 			: {
-				createDate: new Date(now.getTime()).toISOString(),
+				createDate: new Date(dateCopy).toISOString(),
 				workTime: 0,
 				pauseTime: 0,
 				counterPause: 0,
 				pomodoros: 0,
 			};
 	}
-
 
 	if (actualPeriod === 'thisWeek') {
 		weekArray.splice(0, 7)
